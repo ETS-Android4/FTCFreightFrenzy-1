@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.Robot;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -12,7 +11,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 import org.firstinspires.ftc.teamcode.Misc.MathFunctions;
 
-@Disabled
 public class Gyroscope extends RobotComponent{
     private final BNO055IMU imu;
 

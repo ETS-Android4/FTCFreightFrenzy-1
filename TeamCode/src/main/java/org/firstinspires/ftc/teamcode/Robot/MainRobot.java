@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.Robot;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
@@ -11,12 +10,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Disabled
 public class MainRobot {
     public Boolean isRunning = true;
 
-//    public Driving driving;
-    public SampleMecanumDrive drive;
+    public TeleOpDrive teleOpDrive;
+    public SampleMecanumDrive autonomousDrive; // SampleMecanumDrive = roadrunner mecanum drive script
     public Gyroscope gyroscope;
     public Logging logging;
     public ArrayList<RobotComponent> componentsList = new ArrayList<RobotComponent>();
@@ -35,9 +33,9 @@ public class MainRobot {
         gyroscope = new Gyroscope(hardwareMap, this);
         componentsList.add(gyroscope);
 
-//        driving = new Driving(hardwareMap, this);
-//        componentsList.add(driving);
-        drive = new SampleMecanumDrive(hardwareMap);
+        teleOpDrive = new TeleOpDrive(hardwareMap, this);
+        componentsList.add(teleOpDrive);
+        autonomousDrive = new SampleMecanumDrive(hardwareMap); // SampleMecanumDrive = roadrunner mecanum drive script
 
         //Switchable components
 //        if(enabledComponents.contains("ComponentName")) {

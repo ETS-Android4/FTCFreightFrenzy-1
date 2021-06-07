@@ -12,7 +12,6 @@ import org.firstinspires.ftc.teamcode.Misc.DataTypes.WheelPowerConfig;
 import java.util.HashMap;
 import java.util.TreeMap;
 
-@Disabled
 public class Logging extends RobotComponent {
     //hardwareMap and telemetry
     private final Telemetry telemetry;

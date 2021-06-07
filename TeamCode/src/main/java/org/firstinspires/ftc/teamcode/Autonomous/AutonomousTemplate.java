@@ -1,12 +1,11 @@
 package org.firstinspires.ftc.teamcode.Autonomous;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.Robot.MainRobot;
-import org.firstinspires.ftc.teamcode.Misc.DataTypes.Vector2;
 
 @Disabled
 @Autonomous(name="AutonomousTemplate", group="")
@@ -21,8 +20,7 @@ public class AutonomousTemplate extends LinearOpMode {
         robot.logging.setLog("state", "Initializing");
 
         robot.gyroscope.waitForGyroCalibration();
-//        robot.driving.resetWheelTicks();
-//        robot.driving.setCurrentPosition(new Vector2(0, 0));
+        robot.autonomousDrive.setPoseEstimate(new Pose2d(0, 0, 0));
         robot.gyroscope.setCurrentAngle(0);
         robot.startThreads();
 
@@ -42,6 +40,6 @@ public class AutonomousTemplate extends LinearOpMode {
 
     //autonomous sequence
     private void autonomousSequence() throws InterruptedException {
-        
+
     }
 }
