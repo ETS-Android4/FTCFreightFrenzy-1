@@ -1,13 +1,6 @@
 package org.firstinspires.ftc.teamcode.Robot;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Misc.DataTypes.Vector2;
-import org.firstinspires.ftc.teamcode.Misc.DataTypes.WheelPosition;
-import org.firstinspires.ftc.teamcode.Misc.DataTypes.WheelPowerConfig;
 
 import java.util.HashMap;
 import java.util.TreeMap;
@@ -46,29 +39,7 @@ public class Logging extends RobotComponent {
     }
 
     private void formatSetLog(String key, Object value){
-        if(value.getClass() == WheelPosition.class){
-            WheelPosition castValue = (WheelPosition) value;
-
-            logs.put(key+"-lf", castValue.lf);
-            logs.put(key+"-rf", castValue.rf);
-            logs.put(key+"-rb", castValue.rb);
-            logs.put(key+"-lb", castValue.lb);
-        }
-        else if(value.getClass() == WheelPowerConfig.class){
-            WheelPowerConfig castValue = (WheelPowerConfig) value;
-
-            logs.put(key+"-lf", castValue.lf);
-            logs.put(key+"-rf", castValue.rf);
-            logs.put(key+"-rb", castValue.rb);
-            logs.put(key+"-lb", castValue.lb);
-        }else if(value.getClass() == Vector2.class){
-            Vector2 castValue = (Vector2) value;
-
-            logs.put(key+"-x", castValue.x);
-            logs.put(key+"-y", castValue.y);
-        }
-        else
-            logs.put(key, value);
+        logs.put(key, value);
     }
 
     public void updateLogs() throws InterruptedException {
