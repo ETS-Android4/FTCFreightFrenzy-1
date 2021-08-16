@@ -8,7 +8,7 @@ public class HardwareConfigIds {
 
     public static String imu = "imu";
 
-    public static String odoVerticalLeft = "odoVerticalLeft";
-    public static String odoVerticalRight = "odoVerticalRight";
-    public static String odoHorizontal = "odoHorizontal";
+    public static String odoVerticalLeft = "LFWheel";
+    public static String odoVerticalRight = "RBWheel";
+    public static String odoHorizontal = "RFWheel";
 }
