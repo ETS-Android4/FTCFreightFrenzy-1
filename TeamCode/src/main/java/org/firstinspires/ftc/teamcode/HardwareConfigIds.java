@@ -7,4 +7,8 @@ public class HardwareConfigIds {
     public static String motorLeftBack = "LBWheel";
 
     public static String imu = "imu";
+
+    public static String odoVerticalLeft = "odoVerticalLeft";
+    public static String odoVerticalRight = "odoVerticalRight";
+    public static String odoHorizontal = "odoHorizontal";
 }
