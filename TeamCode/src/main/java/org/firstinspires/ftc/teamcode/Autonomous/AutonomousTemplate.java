@@ -4,6 +4,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Robot.MainRobot;
 
@@ -14,25 +15,18 @@ public class AutonomousTemplate extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException{
-        String[] enabledComponents = {"logging", "gyroscope", "driving"};
+        String[] enabledComponents = {};
         robot = new MainRobot(hardwareMap, telemetry, enabledComponents, this);
 
         robot.logging.setLog("state", "Initializing");
-
-        robot.gyroscope.waitForGyroCalibration();
-        robot.autonomousDrive.setPoseEstimate(new Pose2d(0, 0, 0));
-        robot.gyroscope.setCurrentAngle(0);
         robot.startThreads();
-
+        robot.initDrive(DcMotor.RunMode.RUN_USING_ENCODER, DcMotor.ZeroPowerBehavior.FLOAT, new Pose2d(0, 0, 0));
         robot.logging.setLog("state", "Initialized, waiting for start");
 
         waitForStart();
 
         robot.logging.setLog("state", "Running");
-
         autonomousSequence();
-
-        robot.logging.clearLogs();
 
         robot.stopRobot();
         robot.logging.setLog("state", "Stopped");

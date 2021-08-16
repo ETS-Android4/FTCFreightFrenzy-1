@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.Robot;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -13,8 +15,7 @@ import java.util.List;
 public class MainRobot {
     public Boolean isRunning = true;
 
-    public TeleOpDrive teleOpDrive;
-    public SampleMecanumDrive autonomousDrive; // SampleMecanumDrive = roadrunner mecanum drive script
+    public SampleMecanumDrive drive; // roadrunner drive class
     public Gyroscope gyroscope;
     public Logging logging;
     public ArrayList<RobotComponent> componentsList = new ArrayList<RobotComponent>();
@@ -23,25 +24,25 @@ public class MainRobot {
 
     public MainRobot(HardwareMap hardwareMap, Telemetry inputTelemetry, String[] inputEnabledComponents, LinearOpMode inputOpmode) {
         opMode = inputOpmode;
-
         List<String> enabledComponents = Arrays.asList(inputEnabledComponents);
 
-        //always enabled components
+        /* always enabled components */
         logging = new Logging(inputTelemetry, this);
         componentsList.add(logging);
 
-        gyroscope = new Gyroscope(hardwareMap, this);
-        componentsList.add(gyroscope);
+        drive = new SampleMecanumDrive(hardwareMap); // roadrunner drive class
 
-        teleOpDrive = new TeleOpDrive(hardwareMap, this);
-        componentsList.add(teleOpDrive);
-        autonomousDrive = new SampleMecanumDrive(hardwareMap); // SampleMecanumDrive = roadrunner mecanum drive script
+        /* Switchable components */
+        if(enabledComponents.contains("gyroscope")) {
+            gyroscope = new Gyroscope(hardwareMap, this);
+            componentsList.add(gyroscope);
+        }
+    }
 
-        //Switchable components
-//        if(enabledComponents.contains("ComponentName")) {
-//            component = new Component(inputTelemetry, this);
-//            componentsList.add(component);
-//        }
+    public void initDrive(DcMotor.RunMode runMode, DcMotor.ZeroPowerBehavior zeroPowerBehavior, Pose2d startPose){
+        drive.setMode(runMode);
+        drive.setZeroPowerBehavior(zeroPowerBehavior);
+        drive.setPoseEstimate(startPose);
     }
 
     public void checkForStop() throws InterruptedException{
