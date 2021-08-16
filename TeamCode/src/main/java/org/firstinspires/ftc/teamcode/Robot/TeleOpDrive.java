@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.Robot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.HardwareConfigIds;
+
 public class TeleOpDrive extends RobotComponent{
     private final DcMotor wheelLF;
     private final DcMotor wheelRF;
@@ -12,10 +14,10 @@ public class TeleOpDrive extends RobotComponent{
     public TeleOpDrive(HardwareMap hardwareMap, MainRobot inputRobot) {
         super(inputRobot);
 
-        wheelLF = hardwareMap.get(DcMotor.class, "LFWheel");
-        wheelRF = hardwareMap.get(DcMotor.class, "RFWheel");
-        wheelRB = hardwareMap.get(DcMotor.class, "RBWheel");
-        wheelLB = hardwareMap.get(DcMotor.class, "LBWheel");
+        wheelLF = hardwareMap.get(DcMotor.class, HardwareConfigIds.motorLeftFront);
+        wheelRF = hardwareMap.get(DcMotor.class, HardwareConfigIds.motorRightFront);
+        wheelRB = hardwareMap.get(DcMotor.class, HardwareConfigIds.motorRightBack);
+        wheelLB = hardwareMap.get(DcMotor.class, HardwareConfigIds.motorLeftBack);
 
         wheelLF.setDirection(DcMotor.Direction.REVERSE);
         wheelLB.setDirection(DcMotor.Direction.REVERSE);
