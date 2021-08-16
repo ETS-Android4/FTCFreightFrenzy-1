@@ -58,7 +58,7 @@ public class Gyroscope extends RobotComponent{
 
             currentAngle += deltaAngle;
 
-            currentAngle = MathFunctions.clampAngleDegrees(currentAngle);
+            currentAngle = MathFunctions.normalizeAngleDegrees(currentAngle);
             lastAngles = angles;
 
             Thread.sleep(50);
@@ -76,6 +76,6 @@ public class Gyroscope extends RobotComponent{
 
     public double getTargetAngle() { return targetAngle; }
     public void setTargetAngle(double newTargetAngle) {
-        targetAngle = MathFunctions.clampAngleDegrees(newTargetAngle);
+        targetAngle = MathFunctions.normalizeAngleDegrees(newTargetAngle);
     }
 }

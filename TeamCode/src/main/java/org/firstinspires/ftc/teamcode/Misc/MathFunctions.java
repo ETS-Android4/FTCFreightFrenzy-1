@@ -14,7 +14,7 @@ public class MathFunctions {
     //endregion
 
     //region angles
-    public static double clampAngleDegrees(double angle){
+    public static double normalizeAngleDegrees(double angle){
         if(angle < 0)
             angle %= -180;
         else
