@@ -9,6 +9,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
+import org.firstinspires.ftc.teamcode.HardwareConfigIds;
 import org.firstinspires.ftc.teamcode.Misc.MathFunctions;
 
 public class Gyroscope extends RobotComponent{
@@ -22,7 +23,7 @@ public class Gyroscope extends RobotComponent{
     public Gyroscope(HardwareMap hardwareMap, MainRobot inputRobot) {
         super(inputRobot);
 
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
+        imu = hardwareMap.get(BNO055IMU.class, HardwareConfigIds.imu);
 
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.mode = BNO055IMU.SensorMode.IMU;

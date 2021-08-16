@@ -6,5 +6,5 @@ public class HardwareConfigIds {
     public static String motorRightBack = "RBWheel";
     public static String motorLeftBack = "LBWheel";
 
-
+    public static String imu = "imu";
 }
