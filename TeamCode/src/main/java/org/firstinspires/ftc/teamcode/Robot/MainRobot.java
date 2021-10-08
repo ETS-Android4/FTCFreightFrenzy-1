@@ -17,6 +17,7 @@ public class MainRobot {
 
     public SampleMecanumDrive drive; // roadrunner drive class
     public Gyroscope gyroscope;
+    public Arm arm;
     public Logging logging;
     public ArrayList<RobotComponent> componentsList = new ArrayList<RobotComponent>();
 
@@ -36,6 +37,10 @@ public class MainRobot {
         if(enabledComponents.contains("gyroscope")) {
             gyroscope = new Gyroscope(hardwareMap, this);
             componentsList.add(gyroscope);
+        }
+        if(enabledComponents.contains("arm")) {
+            arm = new Arm(hardwareMap, this);
+            componentsList.add(arm);
         }
     }
 
