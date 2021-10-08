@@ -11,4 +11,7 @@ public class HardwareConfigIds {
     public static String odoVerticalLeft = "LFWheel";
     public static String odoVerticalRight = "RBWheel";
     public static String odoHorizontal = "RFWheel";
+
+    public static String arm = "arm";
+    public static String gripper = "gripper";
 }
