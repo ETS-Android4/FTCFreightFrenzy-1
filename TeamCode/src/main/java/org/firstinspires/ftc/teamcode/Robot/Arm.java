@@ -12,16 +12,12 @@ public class Arm extends RobotComponent{
     private Servo gripper;
     private DcMotor arm;
 
-    //public bool armstate;
-
     public Arm(HardwareMap hardwareMap, MainRobot inputRobot) {
         super(inputRobot);
 
         //initializing method
-            gripper = hardwareMap.get(Servo.class, HardwareConfigIds.gripper);
-            arm = hardwareMap.get(DcMotor.class, HardwareConfigIds.arm);
-
-        //test = hardwareMap.get(Servo.class, R.string.);
+        gripper = hardwareMap.get(Servo.class, HardwareConfigIds.gripper);
+        arm = hardwareMap.get(DcMotor.class, HardwareConfigIds.arm);
     }
 
     @Override
