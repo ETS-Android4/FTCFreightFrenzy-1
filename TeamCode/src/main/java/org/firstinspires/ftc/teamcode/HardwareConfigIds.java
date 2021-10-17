@@ -14,4 +14,5 @@ public class HardwareConfigIds {
 
     public static String arm = "arm";
     public static String gripper = "gripper";
+    public static String duckArm = "duckarm";
 }

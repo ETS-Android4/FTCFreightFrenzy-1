@@ -8,14 +8,15 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Robot.MainRobot;
 
-@Disabled
 @TeleOp(name = "Main", group = "")
 public class Main extends LinearOpMode {
     private MainRobot robot;
 
+    Boolean BtnPresedDuckArm;
+
     @Override
     public void runOpMode () throws InterruptedException{
-        String[] enabledComponents = { };
+        String[] enabledComponents = {"DuckArm"};
         robot = new MainRobot(hardwareMap, telemetry, enabledComponents, this);
 
         robot.logging.setLog("state", "Initializing");
@@ -36,23 +37,49 @@ public class Main extends LinearOpMode {
         while (opModeIsActive()){
             Drive();
             arm();
+            DuckArm();
 
         }
     }
+
+    public void DuckArm(){
+        if (gamepad1.a && !BtnPresedDuckArm){
+
+            if(robot.DuckArm.ArmState)
+                robot.DuckArm.stopArm();
+            else
+                robot.DuckArm.moveArm();/*
+            BtnPresedDuckArm = !BtnPresedDuckArm;
+            if (BtnPresedDuckArm){
+                robot.DuckArm.moveArm();
+            }
+            else{
+                robot.DuckArm.stopArm();
+            }*/
+        }
+        BtnPresedDuckArm = gamepad1.a;
+        /*else if (!gamepad1.a && BtnPresedDuckArm){
+
+            BtnPresedDuckArm = false;
+        }*/
+
+    }
+
     public void arm(){
 
          if (gamepad1.dpad_up){
             robot.arm.armUp();
          }
-         if (gamepad2.dpad_down){
+         if (gamepad1.dpad_down){
             robot.arm.armDown();
          }
         if (gamepad1.dpad_left){
             robot.arm.gripperOpen();
         }
-        if (gamepad2.dpad_right){
+        if (gamepad1.dpad_right){
             robot.arm.gripperClose();
         }
+
     }
     public void Drive(){
         //joystick
