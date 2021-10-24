@@ -9,7 +9,6 @@ import org.firstinspires.ftc.teamcode.Misc.MathFunctions;
 import org.firstinspires.ftc.teamcode.R;
 
 public class Arm extends RobotComponent{
-max(0, min(g,h,1))
     private Servo gripper;
     private DcMotor arm;
 
