@@ -2,20 +2,19 @@ package org.firstinspires.ftc.teamcode.Autonomous;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Robot.MainRobot;
 
-@Disabled
-@Autonomous(name="AutonomousTemplate", group="")
+
+@Autonomous(name="TeamRed", group="")
 public class TeamRed extends LinearOpMode {
     private MainRobot robot;
 
     @Override
     public void runOpMode() throws InterruptedException{
-        String[] enabledComponents = {};
+        String[] enabledComponents = {"duckArm"};
         robot = new MainRobot(hardwareMap, telemetry, enabledComponents, this);
 
         robot.logging.setLog("state", "Initializing");
@@ -34,6 +33,10 @@ public class TeamRed extends LinearOpMode {
 
     //autonomous sequence
     private void autonomousSequence() throws InterruptedException {
-
+        robot.duckArm.AutonomousDuckArm(1);
     }
+
+    /*
+    AutonomousDuckArm();
+     */
 }

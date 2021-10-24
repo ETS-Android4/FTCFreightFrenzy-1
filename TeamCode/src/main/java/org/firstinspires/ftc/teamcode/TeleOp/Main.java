@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -45,17 +44,12 @@ public class Main extends LinearOpMode {
     public void DuckArm(){
         if (gamepad1.a && !BtnPresedDuckArm){
 
-            if(robot.DuckArm.ArmState)
-                robot.DuckArm.stopArm();
+            if(robot.duckArm.ArmState)
+                robot.duckArm.stopArm();
             else
-                robot.DuckArm.moveArm(1.0, false);
+                robot.duckArm.moveArm();
         }
         BtnPresedDuckArm = gamepad1.a;
-        /*else if (!gamepad1.a && BtnPresedDuckArm){
-
-            BtnPresedDuckArm = false;
-        }*/
-
     }
 
     public void arm(){
