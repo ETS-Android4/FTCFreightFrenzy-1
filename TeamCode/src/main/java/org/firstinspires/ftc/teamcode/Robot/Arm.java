@@ -19,8 +19,6 @@ public class Arm extends RobotComponent{
     public double armSpeed;
     public int armDirection;
 
-    //public bool armstate;
-
     public Arm(HardwareMap hardwareMap, MainRobot inputRobot) {
         super(inputRobot);
 
