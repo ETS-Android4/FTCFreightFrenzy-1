@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.Robot.MainRobot;
 
 @Disabled
-@Autonomous(name="AutonomousTemplate", group="")
+@Autonomous(name="TeamRed", group="")
 public class TeamRed extends LinearOpMode {
     private MainRobot robot;
 
