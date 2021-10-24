@@ -5,17 +5,19 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.HardwareConfigIds;
+import org.firstinspires.ftc.teamcode.Misc.MathFunctions;
 import org.firstinspires.ftc.teamcode.R;
 
 public class Arm extends RobotComponent{
-
+max(0, min(g,h,1))
     private Servo gripper;
     private DcMotor arm;
 
     //arm
     public int armPos;
-    public int armMin = 0;
-    public int armMax = 100;
+    public double armMin = 0;
+    public double armMax = 100;
+    public double armSlowRange = 50;
     public double armSpeed;
     public int armDirection;
 
@@ -57,14 +59,15 @@ public class Arm extends RobotComponent{
     public void armLimits() throws InterruptedException {
         while (robot.isRunning) {
             armPos = arm.getCurrentPosition();
-            if (armPos >= armMax && armDirection == 1) {
-                armDirection = 0;
-            }
-            if (armPos >= armMin && armDirection == -1) {
-                armDirection = 0;
-            }
-            arm.setPower(armSpeed * armDirection);
-            //tijd nog testem
+
+            double power = armSpeed*armDirection;
+            if(armPos <= armMin+armSlowRange && armDirection == -1)
+                    power *= Math.max(0, (armPos-armMin)/armSlowRange);
+            else if(armPos >= armMax-armSlowRange && armDirection == 1)
+                    power *= Math.max(0, (armMax-armPos)/armSlowRange);
+
+            arm.setPower(power);
+
             Thread.sleep(50);
         }
     }
