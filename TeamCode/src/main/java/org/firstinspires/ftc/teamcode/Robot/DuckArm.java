@@ -17,6 +17,7 @@ public class DuckArm extends RobotComponent{
 
         //initializing method
         DuckArm = hardwareMap.get(DcMotor.class, HardwareConfigIds.duckArm);
+        DuckArm.setTargetPosition(0);
     }
 
     @Override
@@ -24,11 +25,10 @@ public class DuckArm extends RobotComponent{
         //start threads here if necessary
     }
 
-    public void moveArm (Double Rotations, boolean State){
+    public void moveArm (){
+
         DuckArm.setPower(-1);
         ArmState = true;
-        int DuckArmPos;
-
     }
 
     public void stopArm (){
@@ -36,13 +36,12 @@ public class DuckArm extends RobotComponent{
         ArmState = false;
     }
 
-    public void AutonomousDuckArm (int Direction, Double Rotations){
-        if (Direction == -1) {
-            robot.DuckArm.moveArm(Rotations, false);
-        }
-        if (Direction == 0){
-            robot.DuckArm.stopArm();
-        }
-
+    public void AutonomousDuckArm (int Rotations){
+        DuckArm.setTargetPosition(Rotations*1120*-1);
+        DuckArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        DuckArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        DuckArm.setPower(-1);
+        while (DuckArm.isBusy() && robot.isRunning){ }
+        DuckArm.setPower(0);
     }
 }
