@@ -42,38 +42,30 @@ public class Arm extends RobotComponent{
         }.start();
     }
     //the gripper
-    public void gripperOpen (){
-        gripper.setPosition(1);
-
-    }
-
+    public void gripperOpen (){ gripper.setPosition(1);}
     public void gripperClose(){
         gripper.setPosition(0);
     }
-    //the arm
+
+    //the arm commands
     public void armUp(){
         armDirection = 1;
     }
 
-    public void armDown (){
-        armDirection = -1;
+    public void armDown (){ armDirection = -1;}
 
-    }
-
-    public void armStop(){
-        armDirection = 0;
-    }
+    public void armStop(){ armDirection = 0;}
 
     public void armLimits() throws InterruptedException {
-        while(robot.isRunning){
+        while (robot.isRunning) {
             armPos = arm.getCurrentPosition();
-            if (armPos >= armMax && armDirection == 1){
+            if (armPos >= armMax && armDirection == 1) {
                 armDirection = 0;
             }
-            if (armPos >= armMin && armDirection == -1){
+            if (armPos >= armMin && armDirection == -1) {
                 armDirection = 0;
             }
-            arm.setPower(armSpeed*armDirection);
+            arm.setPower(armSpeed * armDirection);
             //tijd nog testem
             Thread.sleep(50);
         }

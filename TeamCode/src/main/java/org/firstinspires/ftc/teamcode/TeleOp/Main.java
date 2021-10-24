@@ -48,14 +48,7 @@ public class Main extends LinearOpMode {
             if(robot.DuckArm.ArmState)
                 robot.DuckArm.stopArm();
             else
-                robot.DuckArm.moveArm();/*
-            BtnPresedDuckArm = !BtnPresedDuckArm;
-            if (BtnPresedDuckArm){
-                robot.DuckArm.moveArm();
-            }
-            else{
-                robot.DuckArm.stopArm();
-            }*/
+                robot.DuckArm.moveArm(1.0, false);
         }
         BtnPresedDuckArm = gamepad1.a;
         /*else if (!gamepad1.a && BtnPresedDuckArm){

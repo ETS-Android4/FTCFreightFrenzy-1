@@ -24,14 +24,25 @@ public class DuckArm extends RobotComponent{
         //start threads here if necessary
     }
 
-    public void moveArm (){
-        DuckArm.setPower(1);
+    public void moveArm (Double Rotations, boolean State){
+        DuckArm.setPower(-1);
         ArmState = true;
+        int DuckArmPos;
 
     }
 
     public void stopArm (){
         DuckArm.setPower(0);
         ArmState = false;
+    }
+
+    public void AutonomousDuckArm (int Direction, Double Rotations){
+        if (Direction == -1) {
+            robot.DuckArm.moveArm(Rotations, false);
+        }
+        if (Direction == 0){
+            robot.DuckArm.stopArm();
+        }
+
     }
 }
