@@ -26,6 +26,7 @@ public class Arm extends RobotComponent{
         //initializing method
         gripper = hardwareMap.get(Servo.class, HardwareConfigIds.gripper);
         arm = hardwareMap.get(DcMotor.class, HardwareConfigIds.arm);
+        gripper.scaleRange(0.2, 0.8);
     }
 
     @Override
@@ -41,21 +42,34 @@ public class Arm extends RobotComponent{
         }.start();
     }
     //the gripper
-    public void gripperOpen (){ gripper.setPosition(1);}
+    public void gripperOpen (){
+
+        gripper.setPosition(1);
+    }
     public void gripperClose(){
         gripper.setPosition(0);
     }
 
     //the arm commands
     public void armUp(){
-        armDirection = 1;
+        //armDirection = 1;
+        arm.setPower(-0.5);
+        //arm.setTargetPosition(arm.getCurrentPosition() + 1);
     }
 
-    public void armDown (){ armDirection = -1;}
+    public void armDown (){
+        //armDirection = -1;
+        arm.setPower(0.5);
+        //arm.setTargetPosition(arm.getCurrentPosition() - 1);
+    }
 
-    public void armStop(){ armDirection = 0;}
+    public void armStop(){
+        //armDirection = 0;
+        arm.setPower(0);
 
+    }
     public void armLimits() throws InterruptedException {
+        //dit moets nog getest worden, is ook niet gebruikt in de wedstrijd
         while (robot.isRunning) {
             armPos = arm.getCurrentPosition();
 
@@ -65,7 +79,7 @@ public class Arm extends RobotComponent{
             else if(armPos >= armMax-armSlowRange && armDirection == 1)
                     power *= Math.max(0, (armMax-armPos)/armSlowRange);
 
-            arm.setPower(power);
+            //arm.setPower(power);
 
             Thread.sleep(50);
         }

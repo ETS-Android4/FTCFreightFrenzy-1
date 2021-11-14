@@ -11,11 +11,13 @@ import org.firstinspires.ftc.teamcode.Robot.MainRobot;
 public class Main extends LinearOpMode {
     private MainRobot robot;
 
-    Boolean BtnPresedDuckArm;
+    boolean BtnPresedDuckArm;
+    boolean ArmState = false;
+
 
     @Override
     public void runOpMode () throws InterruptedException{
-        String[] enabledComponents = {"DuckArm"};
+        String[] enabledComponents = {"duckArm", "arm"};
         robot = new MainRobot(hardwareMap, telemetry, enabledComponents, this);
 
         robot.logging.setLog("state", "Initializing");
@@ -37,17 +39,21 @@ public class Main extends LinearOpMode {
             Drive();
             arm();
             DuckArm();
-
         }
     }
 
     public void DuckArm(){
         if (gamepad1.a && !BtnPresedDuckArm){
 
-            if(robot.duckArm.ArmState)
+            if(ArmState) {
+
                 robot.duckArm.stopArm();
-            else
+                ArmState = false;
+            }
+            else{
                 robot.duckArm.moveArm();
+                ArmState = true;
+            }
         }
         BtnPresedDuckArm = gamepad1.a;
     }
@@ -57,9 +63,12 @@ public class Main extends LinearOpMode {
          if (gamepad1.dpad_up){
             robot.arm.armUp();
          }
-         if (gamepad1.dpad_down){
+         else if (gamepad1.dpad_down){
             robot.arm.armDown();
          }
+         else
+             robot.arm.armStop();
+
         if (gamepad1.dpad_left){
             robot.arm.gripperOpen();
         }

@@ -10,7 +10,7 @@ public class DuckArm extends RobotComponent{
 
     private DcMotor DuckArm;
 
-    public boolean ArmState = false;
+    //public boolean ArmState = false;
 
     public DuckArm(HardwareMap hardwareMap, MainRobot inputRobot) {
         super(inputRobot);
@@ -28,12 +28,12 @@ public class DuckArm extends RobotComponent{
     public void moveArm (){
 
         DuckArm.setPower(-1);
-        ArmState = true;
+        //ArmState = true;
     }
 
     public void stopArm (){
         DuckArm.setPower(0);
-        ArmState = false;
+        //ArmState = false;
     }
 
     public void AutonomousDuckArm (int Rotations){
