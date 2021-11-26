@@ -89,6 +89,6 @@ public class Main extends LinearOpMode {
         double LVoor = LY + LX + RX;
         double RVoor = LY - LX - RX;
         //let op volgorede testen
-        robot.drive.setMotorPowers(LVoor, LAchter, RVoor, RAchter);
+        robot.drive.setMotorPowers(LVoor, LAchter, RAchter, RVoor);
     }
 }

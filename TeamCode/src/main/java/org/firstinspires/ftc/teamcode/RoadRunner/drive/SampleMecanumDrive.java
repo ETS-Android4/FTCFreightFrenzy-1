@@ -102,10 +102,10 @@ public class SampleMecanumDrive extends MecanumDrive {
 
         leftFront = hardwareMap.get(DcMotorEx.class, HardwareConfigIds.motorLeftFront);//als je van left voor en achter wisseld klopt het wel, maar links en rechts is gewisseld
         leftRear = hardwareMap.get(DcMotorEx.class, HardwareConfigIds.motorLeftBack);
-        rightRear = hardwareMap.get(DcMotorEx.class, HardwareConfigIds.motorRightBack);
-        rightFront = hardwareMap.get(DcMotorEx.class, HardwareConfigIds.motorRightFront);
+        rightRear = hardwareMap.get(DcMotorEx.class, HardwareConfigIds.motorRightFront);
+        rightFront = hardwareMap.get(DcMotorEx.class, HardwareConfigIds.motorRightBack);
 
-        motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
+        motors = Arrays.asList(leftFront, leftRear, rightFront, rightRear);
 
         for (DcMotorEx motor : motors) {
             MotorConfigurationType motorConfigurationType = motor.getMotorType().clone();

@@ -24,7 +24,7 @@ import org.firstinspires.ftc.teamcode.RoadRunner.drive.SampleMecanumDrive;
  * accurate track width estimate is important or else the angular constraints will be thrown off.
  */
 @Config
-@Disabled
+//@Disabled
 @Autonomous(group = "drive")
 public class TrackWidthTuner extends LinearOpMode {
     public static double ANGLE = 180; // deg
@@ -70,6 +70,8 @@ public class TrackWidthTuner extends LinearOpMode {
             }
 
             double trackWidth = DriveConstants.TRACK_WIDTH * Math.toRadians(ANGLE) / headingAccumulator;
+            telemetry.addData("trackwidth", trackWidth);
+            telemetry.update();
             trackWidthStats.add(trackWidth);
 
             sleep(DELAY);

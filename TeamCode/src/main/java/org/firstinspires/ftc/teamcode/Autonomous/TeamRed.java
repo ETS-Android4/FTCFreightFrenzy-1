@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.Autonomous;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -32,7 +34,12 @@ public class TeamRed extends LinearOpMode {
 
     //autonomous sequence
     private void autonomousSequence() throws InterruptedException {
-        robot.duckArm.AutonomousDuckArm(1);
+        Trajectory traj1 = robot.drive.trajectoryBuilder(new Pose2d())
+                .splineTo(new Vector2d(30, 0), Math.toRadians(90))
+                .splineTo(new Vector2d(0, 30), Math.toRadians(0))
+                .build();
+
+        robot.drive.followTrajectory(traj1);
     }
 
     /*
