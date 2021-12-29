@@ -20,7 +20,7 @@ public class TeamRed extends LinearOpMode {
 
         robot.logging.setLog("state", "Initializing");
         robot.startThreads();
-        robot.initDrive(DcMotor.RunMode.RUN_USING_ENCODER, DcMotor.ZeroPowerBehavior.FLOAT, new Pose2d(0, 0, 0));
+        robot.initDrive(DcMotor.RunMode.RUN_USING_ENCODER, DcMotor.ZeroPowerBehavior.FLOAT, new Pose2d(102 , 136, Math.toRadians(-90)));
         robot.logging.setLog("state", "Initialized, waiting for start");
 
         waitForStart();
@@ -34,12 +34,21 @@ public class TeamRed extends LinearOpMode {
 
     //autonomous sequence
     private void autonomousSequence() throws InterruptedException {
-        Trajectory traj1 = robot.drive.trajectoryBuilder(new Pose2d())
-                .splineTo(new Vector2d(30, 0), Math.toRadians(90))
-                .splineTo(new Vector2d(0, 30), Math.toRadians(0))
+
+        Trajectory traj1 = robot.drive.trajectoryBuilder(new Pose2d(102, 136, Math.toRadians(-90)))
+                .splineTo(new Vector2d(130, 130), Math.toRadians(-90))
                 .build();
 
+
+        Trajectory traj2 = robot.drive.trajectoryBuilder(new Pose2d(130, 130, Math.toRadians(-90)))
+                .splineTo(new Vector2d(136, 100), Math.toRadians(-90))
+                .build();
+        
         robot.drive.followTrajectory(traj1);
+        robot.duckArm.moveArm();
+        Thread.sleep(1000);
+        robot.duckArm.stopArm();
+        robot.drive.followTrajectory(traj2);
     }
 
     /*
