@@ -7,10 +7,11 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.Robot.MainRobot;
 
-@Autonomous(name="TeamRed", group="")
-public class TeamRed extends LinearOpMode {
+@Autonomous(name="TeamBlue", group="")
+public class TeamBlue extends LinearOpMode {
     private MainRobot robot;
 
     @Override
@@ -20,7 +21,7 @@ public class TeamRed extends LinearOpMode {
 
         robot.logging.setLog("state", "Initializing");
         robot.startThreads();
-        robot.initDrive(DcMotor.RunMode.RUN_USING_ENCODER, DcMotor.ZeroPowerBehavior.FLOAT, new Pose2d(-31 , -62, Math.toRadians(180)));
+        robot.initDrive(DcMotor.RunMode.RUN_USING_ENCODER, DcMotor.ZeroPowerBehavior.FLOAT, new Pose2d(-31, 62, Math.toRadians(0)));
         robot.logging.setLog("state", "Initialized, waiting for start");
 
         waitForStart();
@@ -34,19 +35,21 @@ public class TeamRed extends LinearOpMode {
 
     //autonomous sequence
     private void autonomousSequence() throws InterruptedException {
+        TrajectorySequence traj1 = robot.drive.trajectorySequenceBuilder(new Pose2d(-31, 62, Math.toRadians(0)))
+                .setReversed(true)
+                .splineTo(new Vector2d(-57, 59), Math.toRadians(180))
+                .setReversed(false)
 
-        Trajectory traj1 = robot.drive.trajectoryBuilder(new Pose2d(-31, -62, Math.toRadians(180)))
-                .splineTo(new Vector2d(-59, -53), Math.toRadians(90))
+                .addTemporalMarker(() -> robot.duckArm.moveArm())
+                .waitSeconds(3)
+                .addTemporalMarker(() -> robot.duckArm.stopArm())
+
+                .turn(Math.toRadians(-120))
+                //.strafeTo(new Vector2d(-63, 35))
+                .splineTo(new Vector2d(-73, 35), Math.toRadians(-120))
                 .build();
-        Trajectory traj2 = robot.drive.trajectoryBuilder(new Pose2d(-59, -53, Math.toRadians(90)))
-                .splineTo(new Vector2d(-59, -35), Math.toRadians(90))
-                .build();
-        
-        robot.drive.followTrajectory(traj1);
-        robot.duckArm.moveArm();
-        Thread.sleep(3000);
-        robot.duckArm.stopArm();
-        robot.drive.followTrajectory(traj2);
+
+        robot.drive.followTrajectorySequence(traj1);
     }
 
     /*
