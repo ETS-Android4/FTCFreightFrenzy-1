@@ -25,15 +25,15 @@ public class DuckArm extends RobotComponent{
         //start threads here if necessary
     }
 
-    public void moveArm (){
-
+    public void moveArmForward (){
+        DuckArm.setPower(1);
+    }
+    public void moveArmBackward(){
         DuckArm.setPower(-1);
-        //ArmState = true;
     }
 
     public void stopArm (){
         DuckArm.setPower(0);
-        //ArmState = false;
     }
 
     public void AutonomousDuckArm (int Rotations){

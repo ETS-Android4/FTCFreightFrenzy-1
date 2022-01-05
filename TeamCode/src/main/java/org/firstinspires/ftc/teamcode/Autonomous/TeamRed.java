@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.Robot.MainRobot;
 
 @Autonomous(name="TeamRed", group="")
@@ -35,21 +36,16 @@ public class TeamRed extends LinearOpMode {
     //autonomous sequence
     private void autonomousSequence() throws InterruptedException {
 
-        Trajectory traj1 = robot.drive.trajectoryBuilder(new Pose2d(-31, -62, Math.toRadians(180)))
-                .splineTo(new Vector2d(-62, -53), Math.toRadians(90)) //-59
-                .build();
-        Trajectory traj2 = robot.drive.trajectoryBuilder(new Pose2d(-59, -53, Math.toRadians(90)))
-                .splineTo(new Vector2d(-62, -40), Math.toRadians(90))
+        TrajectorySequence trajectory = robot.drive.trajectorySequenceBuilder(new Pose2d(-31, -62, Math.toRadians(180)))
+                .splineTo(new Vector2d(-62, -59), Math.toRadians(90))
+
+                .addTemporalMarker(() -> robot.duckArm.moveArmForward())
+                .waitSeconds(3)
+                .addTemporalMarker(() -> robot.duckArm.stopArm())
+
+                .splineTo(new Vector2d(-62, -35), Math.toRadians(90))
                 .build();
         
-        robot.drive.followTrajectory(traj1);
-        robot.duckArm.moveArm();
-        Thread.sleep(3000);
-        robot.duckArm.stopArm();
-        robot.drive.followTrajectory(traj2);
+        robot.drive.followTrajectorySequence(trajectory);
     }
-
-    /*
-    AutonomousDuckArm();
-     */
 }

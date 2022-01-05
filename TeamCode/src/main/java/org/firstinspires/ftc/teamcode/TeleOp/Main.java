@@ -51,7 +51,7 @@ public class Main extends LinearOpMode {
                 ArmState = false;
             }
             else{
-                robot.duckArm.moveArm();
+                robot.duckArm.moveArmForward();
                 ArmState = true;
             }
         }
