@@ -39,7 +39,7 @@ public class TeamRed extends LinearOpMode {
                 .splineTo(new Vector2d(-62, -53), Math.toRadians(90)) //-59
                 .build();
         Trajectory traj2 = robot.drive.trajectoryBuilder(new Pose2d(-59, -53, Math.toRadians(90)))
-                .splineTo(new Vector2d(-59, -35), Math.toRadians(90))
+                .splineTo(new Vector2d(-62, -40), Math.toRadians(90))
                 .build();
         
         robot.drive.followTrajectory(traj1);
