@@ -45,7 +45,7 @@ public class TeamBlue extends LinearOpMode {
                 .addTemporalMarker(() -> robot.duckArm.stopArm())
 
                 .turn(Math.toRadians(-90))
-                .splineTo(new Vector2d(-62, 35), Math.toRadians(-90))
+                .splineTo(new Vector2d(-62, 37), Math.toRadians(-90))
                 .build();
 
         robot.drive.followTrajectorySequence(trajectory);
