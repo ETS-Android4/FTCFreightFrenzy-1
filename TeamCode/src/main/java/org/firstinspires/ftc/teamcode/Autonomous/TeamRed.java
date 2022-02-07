@@ -43,7 +43,7 @@ public class TeamRed extends LinearOpMode {
                 .waitSeconds(3)
                 .addTemporalMarker(() -> robot.duckArm.stopArm())
 
-                .splineTo(new Vector2d(-62, -37), Math.toRadians(90))
+                .splineTo(new Vector2d(-65, -37), Math.toRadians(90))
                 .build();
         
         robot.drive.followTrajectorySequence(trajectory);

@@ -37,15 +37,15 @@ public class TeamBlue extends LinearOpMode {
     private void autonomousSequence() throws InterruptedException {
         TrajectorySequence trajectory = robot.drive.trajectorySequenceBuilder(new Pose2d(-31, 62, Math.toRadians(0)))
                 .setReversed(true)
-                .splineTo(new Vector2d(-47, 59), Math.toRadians(180))
+                .splineTo(new Vector2d(-62, 56), Math.toRadians(180))
                 .setReversed(false)
 
-                .addTemporalMarker(() -> robot.duckArm.moveArmBackward())
+                .addTemporalMarker(() -> robot.duckArm.moveArmForward())
                 .waitSeconds(3)
                 .addTemporalMarker(() -> robot.duckArm.stopArm())
 
                 .turn(Math.toRadians(-90))
-                .splineTo(new Vector2d(-62, 37), Math.toRadians(-90))
+                .splineTo(new Vector2d(-65, 37), Math.toRadians(-90))
                 .build();
 
         robot.drive.followTrajectorySequence(trajectory);
