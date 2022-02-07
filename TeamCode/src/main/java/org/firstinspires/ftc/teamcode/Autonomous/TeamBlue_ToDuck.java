@@ -6,6 +6,7 @@ import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.Robot.MainRobot;
@@ -34,14 +35,17 @@ public class TeamBlue_ToDuck extends LinearOpMode {
     }
 
     //autonomous sequence
-    private void autonomousSequence() throws InterruptedException {
+    private void autonomousSequence() {
+        ElapsedTime timer = new ElapsedTime();
+        double stopDuckArmTime = 27;
+
         TrajectorySequence trajectory = robot.drive.trajectorySequenceBuilder(new Pose2d(-31, 62, Math.toRadians(0)))
                 .setReversed(true)
                 .splineTo(new Vector2d(-62, 56), Math.toRadians(180))
                 .setReversed(false)
 
                 .addTemporalMarker(() -> robot.duckArm.moveArmForward())
-                .waitSeconds(3)
+                .waitSeconds(stopDuckArmTime - timer.seconds())
                 .addTemporalMarker(() -> robot.duckArm.stopArm())
 
                 .turn(Math.toRadians(-90))
