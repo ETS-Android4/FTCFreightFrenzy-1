@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.Robot.MainRobot;
 
-@Autonomous(name="TeamBlue_ToWarehous", group="")
-public class TeamBlue_ToWarehous extends LinearOpMode {
+@Autonomous(name="TeamBlue_ToWarehouse", group="")
+public class TeamBlue_ToWarehouse extends LinearOpMode {
     private MainRobot robot;
 
     public Pose2d startPose = new Pose2d(-15, 69, Math.toRadians(-90));
@@ -35,9 +35,8 @@ public class TeamBlue_ToWarehous extends LinearOpMode {
     }
 
     //autonomous sequence
-    private void autonomousSequence() throws InterruptedException {
+    private void autonomousSequence() {
         TrajectorySequence trajectory = robot.drive.trajectorySequenceBuilder(startPose)
-
                 .splineTo(new Vector2d(12, 46), Math.toRadians(0))
                 .splineTo(new Vector2d(47, 46), Math.toRadians(0))
                 .build();
