@@ -13,6 +13,8 @@ import org.firstinspires.ftc.teamcode.Robot.MainRobot;
 public class TeamBlue_ToWarehous extends LinearOpMode {
     private MainRobot robot;
 
+    public Pose2d startPose = new Pose2d(-15, 69, Math.toRadians(-90));
+
     @Override
     public void runOpMode() throws InterruptedException{
         String[] enabledComponents = {"duckArm"};
@@ -20,7 +22,7 @@ public class TeamBlue_ToWarehous extends LinearOpMode {
 
         robot.logging.setLog("state", "Initializing");
         robot.startThreads();
-        robot.initDrive(DcMotor.RunMode.RUN_USING_ENCODER, DcMotor.ZeroPowerBehavior.FLOAT, new Pose2d(-15, 69, Math.toRadians(-90)));
+        robot.initDrive(DcMotor.RunMode.RUN_USING_ENCODER, DcMotor.ZeroPowerBehavior.FLOAT, startPose);
         robot.logging.setLog("state", "Initialized, waiting for start");
 
         waitForStart();
@@ -34,9 +36,10 @@ public class TeamBlue_ToWarehous extends LinearOpMode {
 
     //autonomous sequence
     private void autonomousSequence() throws InterruptedException {
-        TrajectorySequence trajectory = robot.drive.trajectorySequenceBuilder(new Pose2d(-15, 69, Math.toRadians(-90)))
-                .splineTo(new Vector2d(-15, 46), Math.toRadians(0))
-                .splineTo(new Vector2d(46, 46), Math.toRadians(0))
+        TrajectorySequence trajectory = robot.drive.trajectorySequenceBuilder(startPose)
+
+                .splineTo(new Vector2d(12, 46), Math.toRadians(0))
+                .splineTo(new Vector2d(47, 46), Math.toRadians(0))
                 .build();
 
         robot.drive.followTrajectorySequence(trajectory);

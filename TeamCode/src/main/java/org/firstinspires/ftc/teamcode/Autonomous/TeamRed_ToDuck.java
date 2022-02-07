@@ -15,6 +15,8 @@ import org.firstinspires.ftc.teamcode.Robot.MainRobot;
 public class TeamRed_ToDuck extends LinearOpMode {
     private MainRobot robot;
 
+    public Pose2d startPose = new Pose2d(-31 , -62, Math.toRadians(180));
+
     @Override
     public void runOpMode() throws InterruptedException{
         String[] enabledComponents = {"duckArm"};
@@ -22,7 +24,7 @@ public class TeamRed_ToDuck extends LinearOpMode {
 
         robot.logging.setLog("state", "Initializing");
         robot.startThreads();
-        robot.initDrive(DcMotor.RunMode.RUN_USING_ENCODER, DcMotor.ZeroPowerBehavior.FLOAT, new Pose2d(-31 , -62, Math.toRadians(180)));
+        robot.initDrive(DcMotor.RunMode.RUN_USING_ENCODER, DcMotor.ZeroPowerBehavior.FLOAT, startPose);
         robot.logging.setLog("state", "Initialized, waiting for start");
 
         waitForStart();
@@ -36,11 +38,11 @@ public class TeamRed_ToDuck extends LinearOpMode {
 
     //autonomous sequence
     private void autonomousSequence() {
-        TrajectorySequence trajectory = robot.drive.trajectorySequenceBuilder(new Pose2d(-31, -62, Math.toRadians(180)))
+        TrajectorySequence trajectory = robot.drive.trajectorySequenceBuilder(startPose)
                 .splineTo(new Vector2d(-62, -59), Math.toRadians(90))
 
                 .addTemporalMarker(() -> robot.duckArm.moveArmBackward())
-                .waitSeconds(19)
+                .waitSeconds(21)
                 .addTemporalMarker(() -> robot.duckArm.stopArm())
 
                 .splineTo(new Vector2d(-65, -37), Math.toRadians(90))
