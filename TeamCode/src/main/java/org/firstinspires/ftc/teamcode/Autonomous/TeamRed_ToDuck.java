@@ -36,14 +36,11 @@ public class TeamRed_ToDuck extends LinearOpMode {
 
     //autonomous sequence
     private void autonomousSequence() {
-        ElapsedTime timer = new ElapsedTime();
-        double stopDuckArmTime = 27;
-
         TrajectorySequence trajectory = robot.drive.trajectorySequenceBuilder(new Pose2d(-31, -62, Math.toRadians(180)))
                 .splineTo(new Vector2d(-62, -59), Math.toRadians(90))
 
                 .addTemporalMarker(() -> robot.duckArm.moveArmBackward())
-                .waitSeconds(stopDuckArmTime - timer.seconds())
+                .waitSeconds(19)
                 .addTemporalMarker(() -> robot.duckArm.stopArm())
 
                 .splineTo(new Vector2d(-65, -37), Math.toRadians(90))
