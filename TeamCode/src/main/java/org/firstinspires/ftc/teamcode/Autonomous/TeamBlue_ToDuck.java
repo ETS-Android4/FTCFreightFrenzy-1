@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.RoadRunner.trajectorysequence.TrajectorySequence;
 import org.firstinspires.ftc.teamcode.Robot.MainRobot;
 
-@Autonomous(name="TeamBlue", group="")
-public class TeamBlue extends LinearOpMode {
+@Autonomous(name="TeamBlue_ToDuck", group="")
+public class TeamBlue_ToDuck extends LinearOpMode {
     private MainRobot robot;
 
     @Override
