@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.HardwareConfigIds;
 import org.firstinspires.ftc.teamcode.Misc.MathFunctions;
 import org.firstinspires.ftc.teamcode.R;
@@ -14,8 +15,8 @@ public class Arm extends RobotComponent{
 
     //arm
     public int armPos;
-    public double armMin = 0;
-    public double armMax = 100;
+    public double armMin = -15;
+    public double armMax = 1200;
     public double armSlowRange = 50;
     public double armSpeed;
     public int armDirection;
@@ -26,7 +27,7 @@ public class Arm extends RobotComponent{
         //initializing method
         gripper = hardwareMap.get(Servo.class, HardwareConfigIds.gripper);
         arm = hardwareMap.get(DcMotor.class, HardwareConfigIds.arm);
-        gripper.scaleRange(0.2, 0.8);
+        gripper.scaleRange(0.7, 1.0);// was 0,2 0,8
     }
 
     @Override
@@ -53,25 +54,31 @@ public class Arm extends RobotComponent{
     //the arm commands
     public void armUp(){
         //armDirection = 1;
-        arm.setPower(-0.5);
+        //arm.setPower(-0.5);
+        if (arm.getCurrentPosition() <= armMax){
+            arm.setPower(0.5);//werkt is omhoog
+        }
         //arm.setTargetPosition(arm.getCurrentPosition() + 1);
     }
 
     public void armDown (){
         //armDirection = -1;
-        arm.setPower(0.5);
+        //arm.setPower(0.5);
+        if (arm.getCurrentPosition() >= armMin){
+            arm.setPower(-0.5);
+        }
         //arm.setTargetPosition(arm.getCurrentPosition() - 1);
     }
 
     public void armStop(){
-        //armDirection = 0;
+        armDirection = 0;
         arm.setPower(0);
-
     }
     public void armLimits() throws InterruptedException {
         //dit moets nog getest worden, is ook niet gebruikt in de wedstrijd
         while (robot.isRunning) {
             armPos = arm.getCurrentPosition();
+            robot.logging.setLog("log", arm.getCurrentPosition());
 
             double power = armSpeed*armDirection;
             if(armPos <= armMin+armSlowRange && armDirection == -1)
