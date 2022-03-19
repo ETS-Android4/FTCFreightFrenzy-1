@@ -37,7 +37,7 @@ public class TeamRed_ToWarehouse extends LinearOpMode {
     //autonomous sequence
     private void autonomousSequence() {
         TrajectorySequence trajectory = robot.drive.trajectorySequenceBuilder(startPose)
-                //.addTemporalMarker(() -> robot.arm.armToPos(1000))    //diable
+                .addTemporalMarker(() -> robot.arm.armToPos(1000))
                 .waitSeconds(5)
                 .splineTo(new Vector2d(12, -46), Math.toRadians(0))
                 .splineTo(new Vector2d(47,-46), Math.toRadians(0))

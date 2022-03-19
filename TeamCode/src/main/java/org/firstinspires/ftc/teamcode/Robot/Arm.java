@@ -68,7 +68,24 @@ public class Arm extends RobotComponent{
 
 
     public void armToPos(int pos) {
-        arm.setTargetPosition(pos);
+
+        if (arm.getCurrentPosition()>= pos){
+            arm.setPower(0.5);
+        }else{
+            arm.setPower(0.0);
+        }
+
+
+
+
+
+
+
+
+
+
+
+        /*arm.setTargetPosition(pos);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         int posDif = Math.abs(arm.getCurrentPosition()-pos);
@@ -80,6 +97,6 @@ public class Arm extends RobotComponent{
             posDif = Math.abs(arm.getCurrentPosition()-pos);
         }
 
-        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);*/
     }
 }
