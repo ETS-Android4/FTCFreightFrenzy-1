@@ -45,31 +45,13 @@ public class Main extends LinearOpMode {
     }
 
     public void DuckArm(){
-        //blue
-        if (gamepad1.a && !BtnPresedDuckArm){
-            if(ArmState) {
-                robot.duckArm.stopArm();
-                ArmState = false;
-            }
-            else{
-                robot.duckArm.moveArmForward();
-                ArmState = true;
-            }
+        if(gamepad1.a){
+            robot.duckArm.moveArmForward();
+        } else if (gamepad1.b) {
+            robot.duckArm.moveArmBackward();
+        } else {
+            robot.duckArm.stopArm();
         }
-        BtnPresedDuckArm = gamepad1.a;
-
-        //red
-        if (gamepad1.b && !BtnPresedDuckArm){
-            if(ArmState1) {
-                robot.duckArm.stopArm();
-                ArmState1 = false;
-            }
-            else{
-                robot.duckArm.moveArmBackward();
-                ArmState1 = true;
-            }
-        }
-        BtnPresedDuckArm = gamepad1.b;
     }
 
     public void arm(){

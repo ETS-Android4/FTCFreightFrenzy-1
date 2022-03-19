@@ -33,7 +33,7 @@ public class Arm extends RobotComponent{
 
     @Override
     public void startThreads(){
-
+    // kon weg staat in arm als laatst
     }
 
     //the gripper
@@ -68,23 +68,15 @@ public class Arm extends RobotComponent{
 
 
     public void armToPos(int pos) {
-
-        if (arm.getCurrentPosition()>= pos){
-            arm.setPower(0.5);
-        }else{
-            arm.setPower(0.0);
+        while (robot.isRunning){
+            robot.logging.setLog("log", arm.getCurrentPosition());// laat zijn waarde zien
+            if (arm.getCurrentPosition()<= pos){ // als motor positie kleiner is als de positie van pos beweegt de arm
+                arm.setPower(0.5);
+            }else{ //anders stoppen
+                arm.setPower(0.0);
+                break;
+            }
         }
-
-
-
-
-
-
-
-
-
-
-
         /*arm.setTargetPosition(pos);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
