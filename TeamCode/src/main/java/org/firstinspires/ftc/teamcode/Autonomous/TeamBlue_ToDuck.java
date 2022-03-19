@@ -44,7 +44,7 @@ public class TeamBlue_ToDuck extends LinearOpMode {
                 .setReversed(false)
 
                 .addTemporalMarker(() -> robot.duckArm.moveArmForward())
-                .waitSeconds(20)
+                .waitSeconds(5)
                 .addTemporalMarker(() -> robot.duckArm.stopArm())
 
                 .turn(Math.toRadians(-90))

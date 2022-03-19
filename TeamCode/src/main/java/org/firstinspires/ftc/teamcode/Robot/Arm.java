@@ -14,37 +14,31 @@ public class Arm extends RobotComponent{
     private DcMotor arm;
 
     //arm
-    public int armPos;
-    public double armMin = -15;
-    public double armMax = 1200;
-    public double armSlowRange = 50;
-    public double armSpeed;
-    public int armDirection;
+    public double armMin = 0;
+        public double armMax = 1350;
 
     public Arm(HardwareMap hardwareMap, MainRobot inputRobot) {
         super(inputRobot);
 
         //initializing method
-        gripper = hardwareMap.get(Servo.class, HardwareConfigIds.gripper);
         arm = hardwareMap.get(DcMotor.class, HardwareConfigIds.arm);
+        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        gripper = hardwareMap.get(Servo.class, HardwareConfigIds.gripper);
+        gripper.setDirection(Servo.Direction.REVERSE);
         gripper.scaleRange(0.7, 1.0);// was 0,2 0,8
+
     }
 
     @Override
     public void startThreads(){
-        //start threads here if necessary
-        new Thread(){
-            @Override
-            public void run(){
-                try {
-                    armLimits();
-                } catch (Exception ignored) { }
-            }
-        }.start();
+
     }
+
     //the gripper
     public void gripperOpen (){
-
         gripper.setPosition(1);
     }
     public void gripperClose(){
@@ -53,42 +47,40 @@ public class Arm extends RobotComponent{
 
     //the arm commands
     public void armUp(){
-        //armDirection = 1;
-        //arm.setPower(-0.5);
         if (arm.getCurrentPosition() <= armMax){
-            arm.setPower(0.5);//werkt is omhoog
+            arm.setPower(0.3);
+        } else{
+            arm.setPower(0);
         }
-        //arm.setTargetPosition(arm.getCurrentPosition() + 1);
     }
 
     public void armDown (){
-        //armDirection = -1;
-        //arm.setPower(0.5);
         if (arm.getCurrentPosition() >= armMin){
-            arm.setPower(-0.5);
+            arm.setPower(-0.3);
+        } else {
+            arm.setPower(0);
         }
-        //arm.setTargetPosition(arm.getCurrentPosition() - 1);
     }
 
-    public void armStop(){
-        armDirection = 0;
+    public void stopArm (){
         arm.setPower(0);
+        robot.logging.setLog("arm position", arm.getCurrentPosition());
     }
-    public void armLimits() throws InterruptedException {
-        //dit moets nog getest worden, is ook niet gebruikt in de wedstrijd
-        while (robot.isRunning) {
-            armPos = arm.getCurrentPosition();
-            robot.logging.setLog("log", arm.getCurrentPosition());
 
-            double power = armSpeed*armDirection;
-            if(armPos <= armMin+armSlowRange && armDirection == -1)
-                    power *= Math.max(0, (armPos-armMin)/armSlowRange);
-            else if(armPos >= armMax-armSlowRange && armDirection == 1)
-                    power *= Math.max(0, (armMax-armPos)/armSlowRange);
 
-            //arm.setPower(power);
+    public void armToPos(int pos) {
+        arm.setTargetPosition(pos);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            Thread.sleep(50);
+        int posDif = Math.abs(arm.getCurrentPosition()-pos);
+        while(posDif > 100){
+            try{
+                Thread.sleep(100);
+            } catch (InterruptedException e) {}
+
+            posDif = Math.abs(arm.getCurrentPosition()-pos);
         }
+
+        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 }

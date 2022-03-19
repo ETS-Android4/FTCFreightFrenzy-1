@@ -42,7 +42,7 @@ public class TeamRed_ToDuck extends LinearOpMode {
                 .splineTo(new Vector2d(-62, -59), Math.toRadians(90))
 
                 .addTemporalMarker(() -> robot.duckArm.moveArmBackward())
-                .waitSeconds(21)
+                .waitSeconds(5)
                 .addTemporalMarker(() -> robot.duckArm.stopArm())
 
                 .splineTo(new Vector2d(-65, -37), Math.toRadians(90))

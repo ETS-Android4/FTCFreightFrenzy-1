@@ -12,6 +12,7 @@ public class Main extends LinearOpMode {
 
     boolean BtnPresedDuckArm;
     boolean ArmState = false;
+    boolean ArmState1 = false;
 
 
     @Override
@@ -44,10 +45,9 @@ public class Main extends LinearOpMode {
     }
 
     public void DuckArm(){
+        //blue
         if (gamepad1.a && !BtnPresedDuckArm){
-
             if(ArmState) {
-
                 robot.duckArm.stopArm();
                 ArmState = false;
             }
@@ -57,26 +57,37 @@ public class Main extends LinearOpMode {
             }
         }
         BtnPresedDuckArm = gamepad1.a;
+
+        //red
+        if (gamepad1.b && !BtnPresedDuckArm){
+            if(ArmState1) {
+                robot.duckArm.stopArm();
+                ArmState1 = false;
+            }
+            else{
+                robot.duckArm.moveArmBackward();
+                ArmState1 = true;
+            }
+        }
+        BtnPresedDuckArm = gamepad1.b;
     }
 
     public void arm(){
-
-         if (gamepad1.dpad_up){
+         if (gamepad1.left_trigger >= 0.5){//gamepad1.dpad_up
             robot.arm.armUp();
          }
-         else if (gamepad1.dpad_down){
+         else if (gamepad1.right_trigger >= 0.5){//gamepad1.dpad_down
             robot.arm.armDown();
+         } else {
+             robot.arm.stopArm();
          }
-         else
-             robot.arm.armStop();
 
-        if (gamepad1.dpad_left){
+        if (gamepad1.left_bumper){//gamepad1.dpad_left
             robot.arm.gripperOpen();
         }
-        if (gamepad1.dpad_right){
+        if (gamepad1.right_bumper){//gamepad1.dpad_right
             robot.arm.gripperClose();
         }
-
     }
     public void Drive(){
         //joystick
