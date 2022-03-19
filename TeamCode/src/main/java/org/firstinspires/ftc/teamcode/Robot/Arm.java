@@ -22,7 +22,6 @@ public class Arm extends RobotComponent{
 
         //initializing method
         arm = hardwareMap.get(DcMotor.class, HardwareConfigIds.arm);
-        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 

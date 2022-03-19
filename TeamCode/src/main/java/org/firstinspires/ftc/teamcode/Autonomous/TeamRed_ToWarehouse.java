@@ -17,7 +17,7 @@ public class TeamRed_ToWarehouse extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException{
-        String[] enabledComponents = {"duckArm"};
+        String[] enabledComponents = {"duckArm", "arm"};
         robot = new MainRobot(hardwareMap, telemetry, enabledComponents, this);
 
         robot.logging.setLog("state", "Initializing");
@@ -37,7 +37,7 @@ public class TeamRed_ToWarehouse extends LinearOpMode {
     //autonomous sequence
     private void autonomousSequence() {
         TrajectorySequence trajectory = robot.drive.trajectorySequenceBuilder(startPose)
-                .addTemporalMarker(() -> robot.arm.armToPos(1000))
+                //.addTemporalMarker(() -> robot.arm.armToPos(1000))    //diable
                 .waitSeconds(5)
                 .splineTo(new Vector2d(12, -46), Math.toRadians(0))
                 .splineTo(new Vector2d(47,-46), Math.toRadians(0))
