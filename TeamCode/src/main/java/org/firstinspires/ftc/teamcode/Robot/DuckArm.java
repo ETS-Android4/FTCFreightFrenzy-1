@@ -35,13 +35,4 @@ public class DuckArm extends RobotComponent{
     public void stopArm (){
         DuckArm.setPower(0);
     }
-
-    public void AutonomousDuckArm (int Rotations){
-        DuckArm.setTargetPosition(Rotations*1120*-1);
-        DuckArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        DuckArm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        DuckArm.setPower(-1);
-        while (DuckArm.isBusy() && robot.isRunning){ }
-        DuckArm.setPower(0);
-    }
 }
