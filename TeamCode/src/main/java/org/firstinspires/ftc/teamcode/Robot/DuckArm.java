@@ -7,10 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.teamcode.HardwareConfigIds;
 
 public class DuckArm extends RobotComponent{
-
     private DcMotor DuckArm;
-
-    //public boolean ArmState = false;
 
     public DuckArm(HardwareMap hardwareMap, MainRobot inputRobot) {
         super(inputRobot);
