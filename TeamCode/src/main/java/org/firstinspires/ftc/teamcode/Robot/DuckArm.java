@@ -1,20 +1,18 @@
 package org.firstinspires.ftc.teamcode.Robot;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.HardwareConfigIds;
 
 public class DuckArm extends RobotComponent{
-    private DcMotor DuckArm;
+    private DcMotor duckArm;
 
     public DuckArm(HardwareMap hardwareMap, MainRobot inputRobot) {
         super(inputRobot);
 
         //initializing method
-        DuckArm = hardwareMap.get(DcMotor.class, HardwareConfigIds.duckArm);
-        DuckArm.setTargetPosition(0);
+        duckArm = hardwareMap.get(DcMotor.class, HardwareConfigIds.duckArm);
     }
 
     @Override
@@ -23,13 +21,13 @@ public class DuckArm extends RobotComponent{
     }
 
     public void moveArmForward (){
-        DuckArm.setPower(1);
+        duckArm.setPower(1);
     }
     public void moveArmBackward(){
-        DuckArm.setPower(-1);
+        duckArm.setPower(-1);
     }
 
     public void stopArm (){
-        DuckArm.setPower(0);
+        duckArm.setPower(0);
     }
 }
