@@ -55,19 +55,17 @@ public class Main extends LinearOpMode {
     }
 
     public void arm(){
-         if (gamepad1.left_trigger >= 0.5){//gamepad1.dpad_up
+         if (gamepad1.left_trigger >= 0.5){
             robot.arm.armUp();
-         }
-         else if (gamepad1.right_trigger >= 0.5){//gamepad1.dpad_down
-            robot.arm.armDown();
-         } else {
+         } else if (gamepad1.left_bumper){
+             robot.arm.armDown();
+         } else{
              robot.arm.stopArm();
          }
-
-        if (gamepad1.left_bumper){//gamepad1.dpad_left
-            robot.arm.gripperOpen();
-        }
-        if (gamepad1.right_bumper){//gamepad1.dpad_right
+         if (gamepad1.right_trigger >= 0.5){
+             robot.arm.gripperOpen();
+         }
+        if (gamepad1.right_bumper){
             robot.arm.gripperClose();
         }
     }
